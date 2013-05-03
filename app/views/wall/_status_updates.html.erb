@@ -1,0 +1,16 @@
+<% @status_updates.each do |status| %>
+		
+			<div class="row">
+				<div class="span4">
+					<%= image_tag(get_user_profile_image(status.user).avatar_url, :class => 'status-image') %>
+					<b><small>Shared by: <%= status.user.name %> <br>at <%= status.created_at.strftime("%I:%M:%P on %A, %e %b %Y") %></small></b>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<p><%= status.content %></p>
+					<br>
+					<hr>
+				</div>
+			</div>
+			<% end %>

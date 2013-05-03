@@ -1,0 +1,11 @@
+<%= simple_form_for @profile, :html => {:multipart => true} do |f| %>
+  <%= f.error_notification %>
+
+
+    <%= f.input :about, :input_html => { :class => "span4", :rows => 3} %>
+    <%= f.input :hobbies, :input_html => { :class => "span4"} %>
+    <%= f.input :star_sign, :collection => ['Taurus', 'Gemini', 'Aries'], :input_html => { :class => "span4"} %>
+    <%= f.input :avatar, :as => :file %>
+    <%= f.submit 'Create profile', :class => 'btn btn-success' %>
+
+<% end %>

@@ -1,0 +1,49 @@
+<% if user_signed_in? %>
+<% if current_user.profile %>
+	<h1>My profile</h1>
+	<p>
+	  <b>About me:</b><br>
+	  <%= current_user.profile.about %>
+	</p>
+
+	<p>
+	  <b>My hobbies:</b><br>
+	  <%= current_user.profile.hobbies %>
+	</p>
+
+	<p>
+	  <b>Star sign:</b><br>
+	  <%= current_user.profile.star_sign %>
+	</p>
+<% end %>
+<% end %>
+
+<h3>Users</h3>
+<% @users.each do |user| %>
+  <p><% if user.profile %>
+  		<%=link_to user.name, user_path(user) %>
+  	<% else %>
+  		<%= user.name %>
+  	<% end %></p>
+<% end %>
+
+<% if user_signed_in? %>
+	<% if !current_user.profile %>
+		<%= link_to 'Create your profile', new_profile_path, :class => 'btn btn-info' %>
+	<% end %>
+<% end %>
+
+<% if user_signed_in? %>
+	<%= link_to 'Create group', new_group_path, :class => 'btn btn-primary' %>
+<% end %>
+
+<div class="well">
+	<h2>Groups</h2>
+	<ul>
+		<% @groups.each do |group| %>
+		<li><%= link_to group.name, group %></li>
+		<% end %>
+	</ul>
+</div>
+
+

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  about: MyText
+  hobbies: MyString
+  star_sign: MyString
+  user: 
+
+two:
+  about: MyText
+  hobbies: MyString
+  star_sign: MyString
+  user: 

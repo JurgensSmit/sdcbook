@@ -1,0 +1,41 @@
+<div class="span12">
+<h1>SDCbook Wall</h1>
+<div class="row">
+<div class="span4">
+
+<%= simple_form_for(@status_update) do |f| %>
+	
+	<%= f.input :content, :label => 'Share you thoughts:', :input_html => { :rows => 2, :class => 'span4' } %>
+	<%= f.submit 'share', :class => 'btn btn-primary btn-small', :remote => true %>
+<% end %>
+
+<br>
+<hr>
+<div class="container" id="status_updates">
+	<% @status_updates.each do |status| %>
+
+	<div class="row">
+		<div class="span4">
+			<%= image_tag(get_user_profile_image(status.user).avatar_url, :class => 'status-image') %>
+			<b><small>Shared by: <%= status.user.name %> <br>at <%= status.created_at.strftime("%I:%M:%P on %A, %e %b %Y") %></small></b>
+		</div>
+	</div>
+<div class="row">
+<div class="span4">
+	<p><%= status.content %></p>
+	<br>
+	<% if !current_user.liked?(status) %>
+	<%= link_to 'Like', upvote_status_update_path(status), :method => :post, :class => 'btn' %>
+	<% else %>
+	<%= link_to 'Unlike', downvote_status_update_path(status), :method => :post, :class => 'btn' %>
+	<% end %>
+	<br>
+	Likes: <%= status.likes.size %>
+	<hr>
+</div>
+</div>
+<% end %>
+</div>
+
+
+</div>

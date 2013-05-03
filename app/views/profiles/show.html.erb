@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @profile.user.name %>'s profile</h1>
+<%= image_tag(@profile.avatar_url) if @profile.avatar? %>
+<p>
+  <b>About me:</b>
+  <%= @profile.about %>
+</p>
+
+<p>
+  <b>My hobbies:</b>
+  <%= @profile.hobbies %>
+</p>
+
+<p>
+  <b>Star sign:</b>
+  <%= @profile.star_sign %>
+</p>
+
+
+
+<% if @profile.user == current_user %>
+	<%= link_to 'Edit', edit_profile_path(@profile), :class => 'btn btn-warning' %>
+<% end %>

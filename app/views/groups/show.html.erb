@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @group.name %></h1>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @group.description %>
+</p>
+
+<% if user_signed_in? %>
+	<% if !current_user.is_member?(@group) %>
+		<%= link_to "Join this group", join_group_path(:user => current_user), :method => :post, :class => 'btn btn-primary' %>
+	<% else %>
+		<%= link_to "Leave this group", leave_group_path(:user => current_user), :method => :post, :class => 'btn btn-warning' %>
+	<% end %>
+
+<% end %>
+
+<br>
+<hr>
+<h2>Members</h2>
+<ul>
+<% @group.users.each do |user| %>
+	<li><%= user.name %></li>
+<% end %>
+</ul>
+	

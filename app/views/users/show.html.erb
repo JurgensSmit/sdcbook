@@ -1,0 +1,75 @@
+<% if current_user == @user %>
+<h3>My profile</h3>
+<% else %>
+<h3><%= @user.name %>'s Profile</h3>
+<% end %>
+<%= image_tag(@user.profile.avatar_url, :class => 'profile-image') if @user.profile.avatar? %>
+
+<h3>Following</h3>
+
+<p><%= @user.name %> is following <strong id="following"><%= @user.followed_users.count %></strong> people!</p>
+
+<h3>Followed by</h3>
+<p>and is followed by <strong id="followers"><%= @user.followers.count %></strong> people.</p>
+
+<ul>
+	<% @user.followers.each do |follower| %>
+	<li><%= follower.name %></li>
+	<% end %>
+</ul>
+
+<h3>Following</h3>
+
+<ul>
+	<% @user.followers.each do |follower| %>
+	<li><%= follower.name %></li>
+	<% end %>
+</ul>
+
+
+<br>
+
+<% if user_signed_in? %>
+<% if current_user != @user %>
+<div id="follow_form">
+<% if current_user.following?(@user) %>
+<%= render 'unfollow' %>
+<% else %>
+<%= render 'follow' %>
+<% end %>
+</div>
+<% end %>
+<% end %>
+<p>
+  <b>About me:</b><br>
+  <%= @user.profile.about %>
+</p>
+
+<p>
+  <b>My hobbies:</b><br>
+  <%= @user.profile.hobbies %>
+</p>
+
+<p>
+  <b>Star sign:</b><br>
+  <%= @user.profile.star_sign %>
+</p>
+<p><b>Email:</b><br>
+ <%= @user.email if @user.email %></p>
+
+<% if current_user == @user %>
+ <h2>My groups</h2>
+<table class="table">
+<tr>
+<th>Group</th>
+<th></th>
+</tr>
+ <% @user.groups.each do |group| %>
+  <tr>
+  <td><%= link_to group.name, group_path(group) %></td>
+  <td><%= link_to 'Leave group', leave_group_path(group, :user => current_user), :method => :post, :class => 'btn' %></td>
+  </tr>
+ <% end %>
+ </table>
+ <% end %>
+
